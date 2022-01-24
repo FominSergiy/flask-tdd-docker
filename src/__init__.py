@@ -4,6 +4,7 @@ from flask_restx import Resource, Api
 
 # instantiate the app
 app = Flask(__name__)
+app.config.from_object('src.config.DevelopmentConfig')
 
 # instantiate api
 api = Api(app)
