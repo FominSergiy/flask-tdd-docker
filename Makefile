@@ -8,6 +8,9 @@ update-build:
 run-container:
 	docker-compose up
 
+run-detached:
+	docker-compose up -d
+
 run-docker-tests:
 	docker-compose exec api python -m pytest "src/tests"
 
