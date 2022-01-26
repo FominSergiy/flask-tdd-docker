@@ -19,6 +19,9 @@ def create_app(script_info=None):
     from src.api.ping import ping_blueprint
     app.register_blueprint(ping_blueprint)
 
+    from src.api.users import users_blueprint
+    app.register_blueprint(users_blueprint)
+
     # shell context for flask cli
     @app.shell_context_processor
     def ctx():
