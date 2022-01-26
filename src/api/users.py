@@ -41,4 +41,17 @@ class UserList(Resource):
         response_object['message'] = f'{email} was added!'
         return response_object, 201
 
+class Users(Resource):
+
+    # serialize the response as a JSON object defined in the user API model
+    @api.marshal_with(user)
+    def get(self, id):
+        user =  User.query.filter_by(id=id).first()
+
+        if not user:
+            api.abort(404, f"User {id} does not exist")
+        return user, 200
+
 api.add_resource(UserList, '/users')
+api.add_resource(Users, '/users/<int:id>')
+
