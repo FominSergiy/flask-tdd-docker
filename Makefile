@@ -19,3 +19,6 @@ run-docker-config-tests:
 
 run-docker-unit-tests:
 	docker-compose exec api python -m pytest "src/tests" -k unit
+
+get-code-coverage:
+	docker-compose exec api python -m pytest "src/tests" -p no:warnings --cov="src"
