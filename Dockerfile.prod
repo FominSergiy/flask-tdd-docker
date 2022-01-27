@@ -23,7 +23,7 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # add and run as non-root user
-RUN adduser --disable-password myuser
+RUN adduser --disabled-password myuser
 USER myuser
 
 # run the container
