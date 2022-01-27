@@ -4,15 +4,15 @@ from src import create_app, db
 from src.api.models import User
 
 
-@pytest.fixture(scope='module')
+@pytest.fixture(scope="module")
 def test_app():
     app = create_app()
-    app.config.from_object('src.config.TestingConfig')
+    app.config.from_object("src.config.TestingConfig")
     with app.app_context():
-        yield app        # the tess happen here
+        yield app  # the tess happen here
 
 
-@pytest.fixture(scope='module')
+@pytest.fixture(scope="module")
 def test_database():
     db.create_all()
     yield db
@@ -22,7 +22,7 @@ def test_database():
 
 
 # fixture to add more users
-@pytest.fixture(scope='function')
+@pytest.fixture(scope="function")
 def add_user():
     def _add_user(username, email):
         user = User(username=username, email=email)
