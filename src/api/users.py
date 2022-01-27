@@ -1,5 +1,3 @@
-from urllib import response
-from attr import validate
 from flask import Blueprint, request
 from flask_restx import Resource, Api, fields
 
@@ -17,11 +15,12 @@ user = api.model('User', {
     'created_date': fields.DateTime,
 })
 
+
 class UserList(Resource):
 
     @api.expect(user, validate=True)
     def post(self):
-        post_data  = request.get_json()
+        post_data = request.get_json()
         username = post_data.get('username')
         email = post_data.get('email')
 
@@ -45,17 +44,18 @@ class UserList(Resource):
     def get(self):
         return User.query.all(), 200
 
+
 class Users(Resource):
 
     # serialize the response as a JSON object defined in the user API model
     @api.marshal_with(user)
     def get(self, id):
-        user =  User.query.filter_by(id=id).first()
+        user = User.query.filter_by(id=id).first()
 
         if not user:
             api.abort(404, f"User {id} does not exist")
         return user, 200
 
+
 api.add_resource(UserList, '/users')
 api.add_resource(Users, '/users/<int:id>')
-
